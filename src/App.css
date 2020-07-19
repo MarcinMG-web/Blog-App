@@ -1,38 +1,54 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+
+:root {
+  --box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  box-sizing: border-box;
+ 
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+body {
+  background: url(img/tlo.png);
+  /* This patern from www.subtlepatterns.com  */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  min-height: 100vh;
+  margin: 0;
+  font-family: 'Lato', sans-serif;
+   
+}
+/* Title */
+h1 {
+  letter-spacing: 1px;
+  margin-bottom: 25px;
+  color:#fff;
+}
+.title{
+  color: red;
 }
 
-.App-link {
-  color: #61dafb;
+/* Post */ 
+.card{
+  margin-top: 50px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* .card-text{
+  margin-bottom: 25px;
+} */
+
+.card-body{
+  width: 100%;
+  height: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
 }
+
+
+
+

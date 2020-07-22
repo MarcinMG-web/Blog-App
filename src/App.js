@@ -1,18 +1,16 @@
 import React, {useState, useEffect} from 'react';
-
-import {Header} from './components/Header';
+import Header from './components/Header';
 import Post from './components/Posts';
-
-
+import Pagination from './components/Pagination';
 import axios from 'axios';
 import './App.css';
 
-function App() {
+const App = () => {
 
   const [ posts, setPosts ] = useState([]); 
   const [ loading, setLoading ] = useState(false);
   const [ curreatPage, setcurreatPage ] = useState(1);
-  const [ postPerPage, setpostPerPage ] = useState(5); 
+  const [ postsPerPage, ] = useState(8); 
  
     useEffect(() => {
       const fetchPost = async () => {
@@ -23,14 +21,27 @@ function App() {
       }
 
       fetchPost();
-    }, [])
+    }, []);
+
+    // Get current post
+    const indexOfLastPost = curreatPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+
+    // Changee page
+    const paginate = (pageNumber) => setcurreatPage(pageNumber);
 
     console.log(posts);
     return (
       
       <div className="App">
         <Header />
-        <Post posts={posts} loading={loading}/>
+        <Post posts={currentPosts} loading={loading}/>
+        <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={posts.length}
+          paginate={paginate}
+        />
       </div> 
     );
 }

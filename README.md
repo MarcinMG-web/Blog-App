@@ -1,3 +1,5 @@
+## Blog App
+
 Post app. After the page loads. App and dropdown should be displayed with any user selected from the "/ public-api / users" resource.
 
 After selecting a specific user we display:

@@ -66,3 +66,12 @@ h1 {
   display: flex;
   flex-direction: row;
 }
+/* AddPostComment */
+.btn-success {
+  margin-top: 10px;
+}
+
+.lableComent {
+  color: #fff;
+}
+

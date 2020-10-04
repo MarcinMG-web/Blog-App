@@ -1,4 +1,5 @@
 import React from 'react';
+import Comments from './Comments'
 
 const Pagination = ({postsPerPage, totalPosts, paginate}) => {
   
@@ -11,18 +12,25 @@ const pageNumbers = [];
 }
 
     return (
-        <nav className='pagination-sm'>
-            <ul className="pagination">
-                {pageNumbers.map(number =>(
-                    <li key={number} className="page-item">
-                        <a onClick={() => paginate(number)} href="!#" className = "page-link">
-                            {number}
-                        </a>
-                    </li>
-                ))}
-                
-            </ul>
-        </nav>
+        <div>
+            <nav className='pagination-sm'>
+                <ul className="pagination">
+                    {pageNumbers.map(number =>(
+                        <li key={number} className="page-item">
+                            <a 
+                            onClick={() => paginate(number)} 
+                            href="!#" 
+                            className = "page-link"
+                            >
+                                {number}
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+                <br />
+            </nav>
+            {<Comments />}
+        </div>
     )
 }
 

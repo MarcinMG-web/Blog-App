@@ -1,10 +1,26 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import Pagination from './Pagination';
+import axios from 'axios';
 
- const Posts = ({posts,isloading}) => {
+ const Posts = () => {
     
+    const [posts, setPosts] = useState([]);
+    const [isloading, setLoading] = useState(false);
+
     const [ curreatPage, setcurreatPage ] = useState(1);
     const [ postsPerPage, ] = useState(8); 
+
+    useEffect(() => {
+        const getPost = async () => {
+            setLoading(true);
+            const baseURL = `https://jsonplaceholder.typicode.com/posts`
+            const res = await axios.get(baseURL);
+            setPosts(res.data);
+            setLoading(false);
+        }
+
+        getPost();
+    }, []);
 
     // Get current post
     const indexOfLastPost = curreatPage * postsPerPage;
@@ -15,10 +31,12 @@ import Pagination from './Pagination';
     const paginate = (pageNumber) => setcurreatPage(pageNumber);
 
 
+
     if(isloading){
         return <h1>Loading ...</h1>
     }
     
+    console.log(posts)
     return (
   
         <div>

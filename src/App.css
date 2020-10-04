@@ -20,7 +20,7 @@ body {
 
 .App {
   margin: 30px auto;
-  width: 100vw;
+  width: 75vw;
 }
 
 /* Title */
@@ -51,6 +51,12 @@ h1 {
   margin-bottom: 10px;
   color: #fff;
   background-color: rgba(0, 0, 0, 0.5);
+  word-wrap: break-word;
+  word-spacing: normal;
+}
+.card-body-userID{
+ position: absolute;
+ right: 10em;
 }
 
 /* Pagination */

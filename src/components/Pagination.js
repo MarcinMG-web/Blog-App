@@ -1,12 +1,14 @@
 import React from 'react';
 
+const Pagination = ({postsPerPage, totalPosts, paginate}) => {
+  
 
-const Pagination = ({ postsPerPage, totalPosts, paginate}) => {
-  const pageNumbers = [];
+const pageNumbers = [];
 
   for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
     pageNumbers.push(i);
-  }
+   
+}
 
     return (
         <nav className='pagination-sm'>
@@ -23,4 +25,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate}) => {
         </nav>
     )
 }
+
+
+
 export default Pagination;

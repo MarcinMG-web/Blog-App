@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
 
 * {
@@ -23,7 +22,7 @@ body {
   width: 75vw;
 }
 
-/* Title */
+/* Header */
 h1 {
   letter-spacing: 1px;
   margin-bottom: 25px;
@@ -32,18 +31,22 @@ h1 {
   min-width: 100px;
   
 }
-.title{
+.title {
   color: red;
 }
 
-/* Post */ 
-.card{
+/* Posts */ 
+.card-lable{
+  color: #fff;
+}
+
+.card {
   margin-top: 50px;
   min-width: 100px;
   display: flex;
 }
 
-.card-body{
+.card-body {
   width: 100%;
   height: 100%;
   min-width: 100px;
@@ -54,24 +57,29 @@ h1 {
   word-wrap: break-word;
   word-spacing: normal;
 }
-.card-body-userID{
+
+.card-body-userID {
  position: absolute;
  right: 10em;
 }
 
 /* Pagination */
-.pagination-sm{
+.pagination-sm {
   align-items: center;
   justify-content: center;
   display: flex;
   flex-direction: row;
 }
-/* AddPostComment */
+
+/* Comments */
 .btn-success {
   margin-top: 10px;
 }
 
-.lableComent {
-  color: #fff;
+.form-lable {
+  color:red;
 }
 
+.form-control {
+  margin-top: 5px;
+}

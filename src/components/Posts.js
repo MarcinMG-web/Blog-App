@@ -6,50 +6,48 @@ import axios from 'axios';
     
     const [posts, setPosts] = useState([]);
     const [isloading, setLoading] = useState(false);
-    
-    // From Button
-    const [idFormButtonClick, setiIdFormButtonClick] = useState(1)
 
+    const [idFromButton, setIdFromButton] = useState(1)
+    
     const [ curreatPage, setCurreatPage ] = useState(1);
-    const [ postsPerPage ] = useState(8); 
+    const [ postsPerPage ] = useState(1); 
 
     useEffect(() => {
         const getPost = async () => {
             setLoading(true);
-            const baseURL = `https://jsonplaceholder.typicode.com/posts?userId=${idFormButtonClick}`
+            const baseURL = `https://jsonplaceholder.typicode.com/posts/${idFromButton}/comments`
             const res = await axios.get(baseURL);
             setPosts(res.data);
             setLoading(false);
         }
 
         getPost();
-    }, [idFormButtonClick]);
+    }, [idFromButton]);
 
     // Get current post
     const indexOfLastPost = curreatPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
     const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
-
-    // Changee page
-    const paginate = (pageNumber) => setCurreatPage(pageNumber);
-
+    
+    // Handle click button
+    const handleClick = () => {
+        setIdFromButton(idFromButton => idFromButton + 1)
+    }
+       
     if(isloading){
         return <h1>Loading ...</h1>
     }
     
     console.log(posts)
     return (
-  
         <div>
-            <label className="card-lable">Find User to display post: </label >
-            <input 
-                type="text" 
-                value={idFormButtonClick} 
-                onChange={(e)=> setiIdFormButtonClick(e.target.value)}/>
+            <span className="card-lable">Find User ID to display posts:</span>
+                        
             <button 
-                type='button' 
-                value={idFormButtonClick}
-                onClick={setiIdFormButtonClick}
+                type='button'
+                className = "btn btn-outline-secondary"
+                value={idFromButton}
+                onClick={handleClick}
                 >
                 Change User
             </button>
@@ -57,19 +55,25 @@ import axios from 'axios';
             <div>
                 {currentPosts.map(post => (
                     <div className="card-body"key={post.id} >
-                        <div className="card-body-userID">User ID: {post.userId}</div>
+                        <div className="card-body-userID">User ID: {post.postId}</div>
                             {/* POST  TITLE*/}
-                                <b>Post: {post.title}</b>
+                                <b>Title: {post.name}</b>
                             <br /><br /> 
                             
                             {/* POST  BODY*/}
-                            <p className="card-body">
+                            <p className = "card-body" >
                                 <i>Body: {post.body}</i>
+                            </p>
+                            <p className = "card-body" >
+                                <i>By: {post.email}</i>
                             </p>
                      </div>
                     ))} 
             </div>
-            {<Pagination  postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate}/>}
+            {<Pagination 
+            postsPerPage={postsPerPage} 
+            totalPosts={posts.length} 
+            setCurreatPage={setCurreatPage}/>}
         </div>
     )
 }

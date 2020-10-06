@@ -1,15 +1,16 @@
 import React from 'react';
 import Comments from './Comments'
 
-const Pagination = ({postsPerPage, totalPosts, paginate}) => {
-  
+const Pagination = ({postsPerPage, totalPosts, setCurreatPage}) => {
+
+// Change page
+const paginate = (pageNumber) => setCurreatPage(pageNumber);
 
 const pageNumbers = [];
 
   for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
     pageNumbers.push(i);
-   
-}
+   }
 
     return (
         <div>

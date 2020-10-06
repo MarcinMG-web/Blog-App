@@ -3,7 +3,9 @@ import React from 'react'
 const Header = () => {
     return (
         <div>
-            <h1> Blog <span className="title">App</span> </h1>
+            <h1 className = "Header__Blog" > Blog
+                <span className="Header__Title">App</span>
+            </h1>
         </div>
     )
 }

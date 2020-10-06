@@ -2,6 +2,7 @@
 
 * {
   box-sizing: border-box;
+  color: #fff;
 }
 
 body {
@@ -23,15 +24,13 @@ body {
 }
 
 /* Header */
-h1 {
+.Header__Blog {
   letter-spacing: 1px;
   margin-bottom: 25px;
-  margin-left: 15px;
   color:#fff;
   min-width: 100px;
-  
 }
-.title {
+.Header__Title {
   color: red;
 }
 
@@ -40,10 +39,8 @@ h1 {
   color: #fff;
 }
 
-.card {
-  margin-top: 50px;
-  min-width: 100px;
-  display: flex;
+.btn-outline-secondary{
+  width: 100%;
 }
 
 .card-body {

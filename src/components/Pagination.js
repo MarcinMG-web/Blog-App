@@ -1,16 +1,15 @@
 import React from 'react';
 import Comments from './Comments'
 
-const Pagination = ({postsPerPage, totalPosts, setCurreatPage}) => {
+const Pagination = ({postsPerPage, totalPosts, setCurreatPage, idFromButton}) => {
 
-// Change page
-const paginate = (pageNumber) => setCurreatPage(pageNumber);
+    // Change page
+    const paginate = (pageNumber) => setCurreatPage(pageNumber);
 
-const pageNumbers = [];
-
-  for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
-    pageNumbers.push(i);
-   }
+    const pageNumbers = [];
+        for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
+            pageNumbers.push(i);
+        }
 
     return (
         <div>
@@ -30,7 +29,7 @@ const pageNumbers = [];
                 </ul>
                 <br />
             </nav>
-            {<Comments />}
+            {idFromButton ? <Comments idFromButton={idFromButton} /> : null}
         </div>
     )
 }

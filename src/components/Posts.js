@@ -29,7 +29,7 @@ import axios from 'axios';
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
     const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
     
-    // Handle click button
+    // Changed Post Id
     const handleClick = () => {
         setIdFromButton(idFromButton => idFromButton + 1)
     }
@@ -41,7 +41,7 @@ import axios from 'axios';
     console.log(posts)
     return (
         <div>
-            <span className="card-lable">Find User ID to display posts:</span>
+            <span className="card-lable">Find Post ID to display posts:</span>
                         
             <button 
                 type='button'
@@ -49,15 +49,15 @@ import axios from 'axios';
                 value={idFromButton}
                 onClick={handleClick}
                 >
-                Change User
+                Change Post
             </button>
 
             <div>
                 {currentPosts.map(post => (
                     <div className="card-body"key={post.id} >
-                        <div className="card-body-userID">User ID: {post.postId}</div>
+                        <div className="card-body-userID">Post ID: {post.postId}</div>
                             {/* POST  TITLE*/}
-                                <b>Title: {post.name}</b>
+                                <b>Name: {post.name}</b>
                             <br /><br /> 
                             
                             {/* POST  BODY*/}
@@ -65,15 +65,22 @@ import axios from 'axios';
                                 <i>Body: {post.body}</i>
                             </p>
                             <p className = "card-body" >
-                                <i>By: {post.email}</i>
+                                <i>Email: {post.email}</i>
                             </p>
                      </div>
                     ))} 
             </div>
-            {<Pagination 
-            postsPerPage={postsPerPage} 
-            totalPosts={posts.length} 
-            setCurreatPage={setCurreatPage}/>}
+
+            {posts ? 
+            <Pagination 
+                postsPerPage={postsPerPage} 
+                totalPosts={posts.length} 
+                setCurreatPage={setCurreatPage}
+                idFromButton={idFromButton}
+                />
+                :
+                null
+            }
         </div>
     )
 }

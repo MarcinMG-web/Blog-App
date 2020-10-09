@@ -29,7 +29,7 @@ const Pagination = ({postsPerPage, totalPosts, setCurreatPage, idFromButton, get
                 </ul>
                 <br />
             </nav>
-            {idFromButton ? <Comments idFromButton={idFromButton} getPost={getPost}/> : null}
+            {idFromButton ? <Comments idFromButton={idFromButton}/> : null}
         </div>
     )
 }

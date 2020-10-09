@@ -1,40 +1,41 @@
 import React, {useState, useEffect} from 'react'
 import Pagination from './Pagination';
 import axios from 'axios';
-import {usePost} from '../services/ApiServis'
+// import {getDatePost} from '../services/ApiServis'
 
  const Posts = () => {
-
-    const [posts, isloading, idFromButton, setIdFromButton, getPost, currentPosts, setCurreatPage,
-        postsPerPage] = usePost()
        
-    // const [posts, setPosts] = useState([]);
-    // const [isloading, setLoading] = useState(true);
+    const [posts, setPosts] = useState([]);
+    const [isloading, setLoading] = useState(true);
 
-    // const [idFromButton, setIdFromButton] = useState(1)
+    const [idFromButton, setIdFromButton] = useState(1)
     
-    // const [ curreatPage, setCurreatPage ] = useState(1);
-    // const [ postsPerPage ] = useState(1); 
+    const [ curreatPage, setCurreatPage ] = useState(1);
+    const [ postsPerPage ] = useState(1); 
 
     useEffect(() => {
 
-        getPost()
-        
-        // const getPost = async () => {
-        //     
-        //     const baseURL = `https://jsonplaceholder.typicode.com/posts/${idFromButton}/comments`
-        //     const res = await axios.get(baseURL);
-        //     setPosts(res.data);
-        //     setLoading(false);
-        // }
+        const getPost = async () => {
+            
+            
+            const baseURL = `https://jsonplaceholder.typicode.com/posts/${idFromButton}/comments`
+            const response = await axios.get(baseURL);
+                try {
+                    setPosts(response.data);
+                    setLoading(false);
+                } catch (err) {
+                    console.log(err)
+                    setLoading(true);
+                }
+            }
 
-        // getPost();
+        getPost();
     }, [idFromButton]);
 
     // Get current post
-    // const indexOfLastPost = curreatPage * postsPerPage;
-    // const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    // const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+    const indexOfLastPost = curreatPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
     
     // Changed Post Id
     const handleClick = () => {
@@ -84,7 +85,7 @@ import {usePost} from '../services/ApiServis'
                 totalPosts={posts.length} 
                 setCurreatPage={setCurreatPage}
                 idFromButton={idFromButton}
-                getPost={getPost}/>
+                />
                 :
                 null
             }

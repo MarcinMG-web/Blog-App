@@ -1,10 +1,8 @@
 import React, {useState} from 'react'
 import axios from 'axios'
-import Posts from './Posts'
 
 
-const Comments = ({idFromButton, getPost}) => {
-
+const Comments = ({idFromButton}) => {
     
     const initialFormComment = {
         name:'',
@@ -34,7 +32,7 @@ const Comments = ({idFromButton, getPost}) => {
             const response = await axios.post(baseURL, formData)
                try {
                     console.log(response)
-                    getPost(formData)
+                   
                } catch(err){
                     console.log(err)
                }                
@@ -42,9 +40,7 @@ const Comments = ({idFromButton, getPost}) => {
         sendPost()
        
     }
-    
-    
-
+  
     return ( 
            
             <form onSubmit = {handleSubmitForm}>

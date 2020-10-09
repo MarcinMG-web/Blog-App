@@ -1,46 +1,39 @@
-import {useState} from 'react'
+import React, {useState} from 'react'
 import axios from 'axios';
+import {idFromButton} from '../components/Posts'
 
-export const usePost = () => {
+const api = axios.create({
+    // https: //jsonplaceholder.typicode.com/posts/${idFromButton}/comments
+    baseURL:`https://jsonplaceholder.typicode.com/posts`
+})
 
-    const [posts, setPosts] = useState([]);
-    const [isloading, setLoading] = useState(true);
+const [ initPost, setInitPost ] = useState([])
 
-    const [idFromButton, setIdFromButton] = useState(1)
-      
-    
-    const [curreatPage, setCurreatPage] = useState(1);
-    const [postsPerPage] = useState(1);
-
-    const getPost = async () => {
-
-        const baseURL = `https://jsonplaceholder.typicode.com/posts/${idFromButton}/comments`
-        const response = await axios.get(baseURL);
-            try{
-                setPosts(response.data);
-                setLoading(false);
-            } catch(err){
-                console.log(err)
-                setLoading(true);
-            }
-        
+export const getPost = async () => {
+    try{
+        const data = await api.get(`/${idFromButton}/comments`)
+        .then(({data})=> data);
+        setInitPost({data})
+    } catch (err) {
+        console.log(err)   
     }
-
-    // Get current post
-    const indexOfLastPost = curreatPage * postsPerPage;
-    const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
     
-    return [
-        posts,
-        isloading, 
-        idFromButton,
-        setIdFromButton,
-        getPost,
-        currentPosts, 
-        setCurreatPage, 
-        postsPerPage
-    ]
-   
 }
 
+export const sendPost = async () => {
+    const res =  await api
+    .post(`/${idFromButton}/comments`, {formData})
+        console.log(res)
+        getPost()
+    .catch(err => console.log(err));
+}
+
+export const deletePost = async (idFromButton) => {
+    const data = await api.delete(`/${idFromButton}/comments`)
+    getPost()
+}
+
+export const updatePost = async (idFromButton, val) => {
+    const data = await api.patch(`/${idFromButton}/comments`, {name: val})
+    getPost()
+}

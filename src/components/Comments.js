@@ -1,13 +1,16 @@
 import React, {useState} from 'react'
 import axios from 'axios'
+import Posts from './Posts'
 
 
-const Comments = ({idFromButton, currentPosts}) => {
+const Comments = ({idFromButton, getPost}) => {
 
+    
     const initialFormComment = {
         name:'',
         email:'',
-        body:''
+        body:'',
+        postId:''
     }
    
     const [formData, updateFormData] = useState(initialFormComment)
@@ -16,7 +19,7 @@ const Comments = ({idFromButton, currentPosts}) => {
         updateFormData({
             ...formData,
             [e.target.name]: e.target.value.trim()
-            })
+        })
     
     }
 
@@ -25,25 +28,30 @@ const Comments = ({idFromButton, currentPosts}) => {
         e.preventDefault();
         console.log(formData)
         
-        const baseURL = `https://jsonplaceholder.typicode.com/posts/${idFromButton}/comments`
-            axios.post(baseURL, formData)
-                .then(response => {
+        
+        const sendPost = async() => {
+            const baseURL = `https://jsonplaceholder.typicode.com/posts/${idFromButton}/comments`
+            const response = await axios.post(baseURL, formData)
+               try {
                     console.log(response)
-                    
-                })
-                .catch(error => {
-                    console.log(error)
-                })
+                    getPost(formData)
+               } catch(err){
+                    console.log(err)
+               }                
+        }
+        sendPost()
+       
     }
     
     
 
     return ( 
            
-            <form onSubmit={handleSubmitForm}>
+            <form onSubmit = {handleSubmitForm}>
                 <label htmlFor="exampleFormControlTextarea1" className='form-lable'>Your Coment:</label>
 
-                <input type={'number'} className={'form-control'}  name={'postId'} placeholder={'PostID:'} onChange={handleChange}/>
+                <input type={'number'} className={'form-control'}  name={'postId'} 
+                placeholder={'PostID:'} onChange={handleChange}/>
 
                 <input type={'text'} className={'form-control'}  name={'name'}  placeholder={'Name:'} onChange={handleChange} />
 
@@ -51,9 +59,12 @@ const Comments = ({idFromButton, currentPosts}) => {
 
                 <input type={'email'} className={'form-control'}  name={'email'}  placeholder={'Email:'} onChange={handleChange}/>
                 
-                <input type="submit" value={'Add Comment'} className="btn btn-success" />
+                <input type={"submit"} value={'Add Comment'} className="btn btn-success" />
+               
             </form>
+           
     )
+   
 }
 
 export default Comments

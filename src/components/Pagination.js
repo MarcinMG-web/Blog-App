@@ -1,7 +1,7 @@
 import React from 'react';
 import Comments from './Comments'
 
-const Pagination = ({postsPerPage, totalPosts, setCurreatPage, idFromButton}) => {
+const Pagination = ({postsPerPage, totalPosts, setCurreatPage, idFromButton, getPost}) => {
 
     // Change page
     const paginate = (pageNumber) => setCurreatPage(pageNumber);
@@ -29,7 +29,7 @@ const Pagination = ({postsPerPage, totalPosts, setCurreatPage, idFromButton}) =>
                 </ul>
                 <br />
             </nav>
-            {idFromButton ? <Comments idFromButton={idFromButton} /> : null}
+            {idFromButton ? <Comments idFromButton={idFromButton} getPost={getPost}/> : null}
         </div>
     )
 }

@@ -15,6 +15,15 @@ import axios from 'axios';
 
     useEffect(() => {
 
+      const result = service.getPost();
+     
+      console.log(result); // wszystkie posty
+     
+     const result = service.sendPosts();
+     console.log(result) // success
+     
+      setState(result);
+     
         const getPost = async () => {
             
             

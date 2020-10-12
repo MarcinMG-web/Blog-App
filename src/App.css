@@ -40,7 +40,7 @@ body {
 }
 
 .btn-outline-secondary{
-  width: 100%;
+  width: 50%;
 }
 
 .card-body {
@@ -57,7 +57,19 @@ body {
 
 .card-body-userID {
  position: absolute;
- right: 10em;
+ right: 12em;
+}
+
+.card-body-postID{
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.btn-warning {
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 /* Pagination */

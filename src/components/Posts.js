@@ -1,94 +1,108 @@
 import React, {useState, useEffect} from 'react'
-import Pagination from './Pagination';
-import axios from 'axios';
-// import {getDatePost} from '../services/ApiServis'
+
+import ShowComments from './ShowComments'
+
+
+import {getAllPosts} from '../services/ApiService'
 
  const Posts = () => {
        
     const [posts, setPosts] = useState([]);
     const [isloading, setLoading] = useState(true);
 
-    const [idFromButton, setIdFromButton] = useState(1)
-    
     const [ curreatPage, setCurreatPage ] = useState(1);
     const [ postsPerPage ] = useState(1); 
+
+    // Display Comments
+    const [display, setDisplay] = useState(false) 
 
     useEffect(() => {
 
         const getPost = async () => {
-            
-            
-            const baseURL = `https://jsonplaceholder.typicode.com/posts/${idFromButton}/comments`
-            const response = await axios.get(baseURL);
-                try {
-                    setPosts(response.data);
-                    setLoading(false);
-                } catch (err) {
-                    console.log(err)
-                    setLoading(true);
-                }
-            }
+            setLoading(false)
+
+            const dataPosts = await getAllPosts();
+            console.log(dataPosts);
+            setPosts(dataPosts) 
+        }
 
         getPost();
-    }, [idFromButton]);
+    }, []);
 
     // Get current post
-    const indexOfLastPost = curreatPage * postsPerPage;
-    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const indexOfLastPost = curreatPage * postsPerPage; 
+    const indexOfFirstPost = indexOfLastPost - postsPerPage; 
     const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
     
-    // Changed Post Id
-    const handleClick = () => {
-        setIdFromButton(idFromButton => idFromButton + 1)
+    // Changed Page 
+    const nextPage = () => {
+        setCurreatPage(curreatPage + 1)
+        // console.log("next : ", nextPage)
+    }
+
+    const prevPage = () => {
+        setCurreatPage(curreatPage - 1)
+        // console.log("prev : ", prevPage)
     }
        
     if(isloading){
         return <h1>Loading ...</h1>
     }
     
-    console.log(posts)
+    
     return (
-        <div>
-            <span className="card-lable">Click the button to display posts:</span>
-                        
+        
+        <div>               
             <button 
                 type='button'
                 className = "btn btn-outline-secondary"
-                value={idFromButton}
-                onClick={handleClick}
+                value={curreatPage}
+                onClick={prevPage}
                 >
-                Change Post
+               Prev Page
+            </button>
+            <button 
+                type='button'
+                className = "btn btn-outline-secondary"
+                value={curreatPage}
+                onClick={nextPage}
+                >
+                Next page
             </button>
 
             <div>
+                
                 {currentPosts.map(post => (
                     <div className="card-body"key={post.id} >
-                        <div className="card-body-userID">Post ID: {post.postId}</div>
+                        <div className="card-body-userID">User ID: {post.userId}</div>
                             {/* POST  TITLE*/}
-                                <b>Name: {post.name}</b>
+                                <b>Name: {post.title}</b>
                             <br /><br /> 
                             
                             {/* POST  BODY*/}
                             <p className = "card-body" >
                                 <i>Body: {post.body}</i>
                             </p>
-                            <p className = "card-body" >
-                                <i>Email: {post.email}</i>
-                            </p>
-                     </div>
-                    ))} 
-            </div>
+                            {/* POST  id*/}
+                        <div className="card-body-postID">Post id: {post.id} </div>
+                        <br />
+                        
+                        <button
+                            type = 'button'
+                            className = "btn btn-warning"
+                            onClick={() => setDisplay(!display)}
+                        >
+                             Show comments 
+                        </button>
 
-            {posts ? 
-            <Pagination 
-                postsPerPage={postsPerPage} 
-                totalPosts={posts.length} 
-                setCurreatPage={setCurreatPage}
-                idFromButton={idFromButton}
-                />
-                :
-                null
-            }
+                        {display && <ShowComments  postId = {post.id} display={display}/>}
+
+                      
+                     </div>
+                    ))}
+
+            </div>
+            
         </div>
     )
 }

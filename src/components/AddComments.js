@@ -1,14 +1,13 @@
 import React, {useState} from 'react'
-import axios from 'axios'
 
+import {sendComment} from '../services/ApiService'
 
-const Comments = ({idFromButton}) => {
+const AddComments = ({postId}) => {
     
     const initialFormComment = {
         name:'',
+        body: '',
         email:'',
-        body:'',
-        postId:''
     }
    
     const [formData, updateFormData] = useState(initialFormComment)
@@ -18,36 +17,27 @@ const Comments = ({idFromButton}) => {
             ...formData,
             [e.target.name]: e.target.value.trim()
         })
-    
-    }
 
+    }
+    // Send form
     const handleSubmitForm = (e) => {
         console.log('formularz wysłany')
         e.preventDefault();
         console.log(formData)
-        
-        
-        const sendPost = async() => {
-            const baseURL = `https://jsonplaceholder.typicode.com/posts/${idFromButton}/comments`
-            const response = await axios.post(baseURL, formData)
-               try {
-                    console.log(response)
-                   
-               } catch(err){
-                    console.log(err)
-               }                
-        }
-        sendPost()
-       
+  
+            const setCommnet = async () => {
+                const assignDataForm = await sendComment(postId, formData)
+                
+                console.log('Nowy komentarz:', assignDataForm)
+            }
+
+        setCommnet();     
     }
   
     return ( 
            
             <form onSubmit = {handleSubmitForm}>
                 <label htmlFor="exampleFormControlTextarea1" className='form-lable'>Your Coment:</label>
-
-                <input type={'number'} className={'form-control'}  name={'postId'} 
-                placeholder={'PostID:'} onChange={handleChange}/>
 
                 <input type={'text'} className={'form-control'}  name={'name'}  placeholder={'Name:'} onChange={handleChange} />
 
@@ -63,4 +53,4 @@ const Comments = ({idFromButton}) => {
    
 }
 
-export default Comments
+export default AddComments

@@ -23,7 +23,8 @@ import {getAllPosts} from '../services/ApiService'
 
             const dataPosts = await getAllPosts();
             console.log(dataPosts);
-            setPosts(dataPosts) 
+            setPosts(dataPosts)
+
         }
 
         getPost();
@@ -44,7 +45,7 @@ import {getAllPosts} from '../services/ApiService'
         setCurreatPage(curreatPage - 1)
         // console.log("prev : ", prevPage)
     }
-       
+    
     if(isloading){
         return <h1>Loading ...</h1>
     }
@@ -73,7 +74,7 @@ import {getAllPosts} from '../services/ApiService'
             <div>
                 
                 {currentPosts.map(post => (
-                    <div className="card-body"key={post.id} >
+                    <div className="card-body"key={post.id} >     
                         <div className="card-body-userID">User ID: {post.userId}</div>
                             {/* POST  TITLE*/}
                                 <b>Name: {post.title}</b>

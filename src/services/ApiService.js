@@ -31,8 +31,8 @@ export const sendComment = async (postId, formData) => {
         .catch(err => console.log(err));
 }
 
-export const deletePost = async (postId) => {
-     return await api.delete(`/posts/${postId}/comments`)
+export const deletePostById = async (postId) => {
+     return await api.delete(`/posts/${postId}`)
     .then(({data})=> data)
                         
      .catch(err => console.log(err));

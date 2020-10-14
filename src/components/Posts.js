@@ -1,14 +1,10 @@
 import React, {useState, useEffect} from 'react'
-
 import ShowComments from './ShowComments'
+import {getPostsById} from '../services/ApiService'
 
+ const Posts = ({userId}) => {
 
-import {getAllPosts} from '../services/ApiService'
-
- const Posts = () => {
-       
     const [posts, setPosts] = useState([]);
-    const [isloading, setLoading] = useState(true);
 
     const [ curreatPage, setCurreatPage ] = useState(1);
     const [ postsPerPage ] = useState(1); 
@@ -18,38 +14,33 @@ import {getAllPosts} from '../services/ApiService'
 
     useEffect(() => {
 
-        const getPost = async () => {
-            setLoading(false)
+        const getPost = async () => { 
 
-            const dataPosts = await getAllPosts();
+            const dataPosts = await getPostsById(userId);
             console.log(dataPosts);
             setPosts(dataPosts)
-
         }
 
         getPost();
-    }, []);
+    }, [userId]);
 
     // Get current post
     const indexOfLastPost = curreatPage * postsPerPage; 
     const indexOfFirstPost = indexOfLastPost - postsPerPage; 
-    const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
-    
+    const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost); 
+ 
     // Changed Page 
     const nextPage = () => {
-        setCurreatPage(curreatPage + 1)
-        // console.log("next : ", nextPage)
+        if (curreatPage < posts.length) {
+            setCurreatPage(curreatPage + 1)
+        } 
     }
 
-    const prevPage = () => {
-        setCurreatPage(curreatPage - 1)
-        // console.log("prev : ", prevPage)
+    const prevPage = () => { 
+        if (curreatPage > 1) {
+            setCurreatPage(curreatPage - 1)
+        }  
     }
-    
-    if(isloading){
-        return <h1>Loading ...</h1>
-    }
-    
     
     return (
         
@@ -77,7 +68,7 @@ import {getAllPosts} from '../services/ApiService'
                     <div className="card-body"key={post.id} >     
                         <div className="card-body-userID">User ID: {post.userId}</div>
                             {/* POST  TITLE*/}
-                                <b>Name: {post.title}</b>
+                                <b>Title: {post.title}</b>
                             <br /><br /> 
                             
                             {/* POST  BODY*/}
@@ -98,7 +89,6 @@ import {getAllPosts} from '../services/ApiService'
 
                         {display && <ShowComments  postId = {post.id} display={display}/>}
 
-                      
                      </div>
                     ))}
 

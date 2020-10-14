@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from './components/Header';
-import Post from './components/Posts';
+import SerchUsers from './components/SerchUsers';
 import './App.css';
 
 const App = () => {
@@ -8,7 +8,7 @@ const App = () => {
   return (      
     <div className="App">
       <Header />
-      <Post />
+      <SerchUsers />
     </div> 
   );
 }

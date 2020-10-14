@@ -1,13 +1,24 @@
 import axios from 'axios';
 
 const api = axios.create({
-    // https: //jsonplaceholder.typicode.com/posts/${idFromButton}/comments
+    // https: //jsonplaceholder.typicode.com/users/${userId}/posts/${postId}/comments
     baseURL: `https://jsonplaceholder.typicode.com/`
 })
 
-export const getAllPosts = async () => {
+export const getAllUsers = async () => {
     try {
-       return await api.get(`/posts`)
+        return await api.get(`/users/`)
+            .then(({data}) => data);
+
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+
+export const getPostsById = async (userId) => {
+    try {
+       return await api.get(`users/${userId}/posts`)
         .then(({data})=> data);
     
     } catch(err) {

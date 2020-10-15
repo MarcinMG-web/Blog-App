@@ -39,7 +39,7 @@ const SerchUsers = () => {
                 <div className="custom-file">
                     <select id="users" onChange={handleChangeSelect}> 
                         
-                        <option>Find Users ...</option>
+                        <option>Users ...</option>
                             {users.map(user =>
                                 <option key={user.id} value={user.id} >
                                 {user.id} {user.name} 

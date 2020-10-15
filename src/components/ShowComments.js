@@ -11,7 +11,6 @@ const ShowComments = ({postId}) => {
 
         const getCommnets = async () => {
             const dataComments = await getCommentsById(postId);
-            console.log(dataComments) 
             setComments(dataComments)
         }
 
@@ -39,7 +38,15 @@ const ShowComments = ({postId}) => {
                     </div>
                     ))}
                 
-                {postId ? <AddComments postId={postId}/> : null} 
+                {
+                postId ? 
+                <AddComments 
+                    postId={postId} 
+                    comments={comments} 
+                    setComments = {setComments}/> 
+                : 
+                null
+                } 
          
         </div>
     )

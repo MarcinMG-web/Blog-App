@@ -85,14 +85,6 @@ option {
   margin-bottom: 5px;
 }
 
-/* Pagination */
-.pagination-sm {
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  flex-direction: row;
-}
-
 /* Comments */
 .btn-success {
   margin-top: 10px;

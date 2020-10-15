@@ -7,7 +7,7 @@ const api = axios.create({
 
 export const getAllUsers = async () => {
     try {
-        return await api.get(`/users/`)
+        return await api.get(`/users`)
             .then(({data}) => data);
 
     } catch (err) {

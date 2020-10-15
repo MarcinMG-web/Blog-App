@@ -17,7 +17,6 @@ import {getPostsById} from '../services/ApiService'
         const getPost = async () => { 
 
             const dataPosts = await getPostsById(userId);
-            console.log(dataPosts);
             setPosts(dataPosts)
         }
 

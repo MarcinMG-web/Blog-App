@@ -1,16 +1,28 @@
-import React, {useState, useEffect} from 'react'
-import ShowComments from './ShowComments'
-import {getPostsById} from '../services/ApiService'
+import React, { useState, useEffect } from 'react'
+import { getPostsById } from '../services/ApiService'
 
- const Posts = ({userId}) => {
+import { ShowComments } from './ShowComments'
 
-    const [posts, setPosts] = useState([]);
+export interface IPost {
+    userId: number,
+    id: number,
+    title: string,
+    body:  string,
+}
 
-    const [ curreatPage, setCurreatPage ] = useState(1);
-    const [ postsPerPage ] = useState(1); 
+interface IProps {
+    userId: number
+}
+
+export const Posts = ({userId}: IProps): JSX.Element => {
+
+    const [posts, setPosts] = useState<IPost[]>([]);
+
+    const [ curreatPage, setCurreatPage ] = React.useState(1);
+    const [ postsPerPage ] = React.useState(1); 
 
     // Display Comments
-    const [display, setDisplay] = useState(false) 
+    const [display, setDisplay] = React.useState(false) 
 
     useEffect(() => {
 
@@ -29,13 +41,13 @@ import {getPostsById} from '../services/ApiService'
     const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost); 
  
     // Changed Page 
-    const nextPage = () => {
+    const nextPage = ():void => {
         if (curreatPage < posts.length) {
             setCurreatPage(curreatPage + 1)
         } 
     }
 
-    const prevPage = () => { 
+    const prevPage = ():void => { 
         if (curreatPage > 1) {
             setCurreatPage(curreatPage - 1)
         }  
@@ -63,7 +75,7 @@ import {getPostsById} from '../services/ApiService'
 
             <div>
                 
-                {currentPosts.map(post => (
+                {currentPosts.map((post: IPost) => (
                     <div className="card-body"key={post.id} >     
                         <div className="card-body-userID">User ID: {post.userId}</div>
                             {/* POST  TITLE*/}
@@ -86,7 +98,7 @@ import {getPostsById} from '../services/ApiService'
                              Show comments 
                         </button>
 
-                        {display && <ShowComments  postId = {post.id} display={display}/>}
+                        {display && <ShowComments  postId = {post.id} />}
 
                      </div>
                     ))}
@@ -96,6 +108,3 @@ import {getPostsById} from '../services/ApiService'
         </div>
     )
 }
- 
-
-export default Posts;

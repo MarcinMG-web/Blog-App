@@ -1,9 +1,9 @@
-import React, { useState, useEffect, ChangeEvent} from 'react'
+import React, { useState, useEffect, ChangeEvent } from 'react'
 import { getAllUsers } from '../services/ApiService'
 
-import Posts from './Posts'
+import { Posts } from './Posts'
 
-export default interface IUser {
+export interface IUser {
     id: number,
     name: string,
     username: string,
@@ -66,7 +66,7 @@ export const SerchUsers = (): JSX.Element => {
                         <option>Users ...</option>
                             {users.map((user: IUser) =>
                                 <option key={user.id} value={user.id} >
-                                {user.id} {user.name} 
+                                 {user.name} - {user.id}
                         </option>
                         )}
 
@@ -74,7 +74,7 @@ export const SerchUsers = (): JSX.Element => {
                 </div>
             </div>
 
-            {(userId>0) ? <Posts  userId = {userId}/> : null}
+            {(userId>0) ? <Posts userId = {userId}/> : null}
 
         </div>
     )

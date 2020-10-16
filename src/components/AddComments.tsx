@@ -1,10 +1,18 @@
-import React, {useState} from 'react'
+import React,  { useState, ChangeEvent, FormEvent } from 'react'
 
-import {sendComment} from '../services/ApiService'
+import { IComment } from './ShowComments'
 
-const AddComments = ({postId, comments, setComments}) => {
+import { sendComment } from '../services/ApiService'
+
+interface IProps {
+    postId: number,
+    comments: any,
+    setComments: any,
+}
+
+export const AddComments = ({postId, comments, setComments}:IProps): JSX.Element => {
     
-    const initialFormComment = {
+    const initialFormComment:IComment  = {
         postId: '',
         id: '',
         name:'',
@@ -12,9 +20,9 @@ const AddComments = ({postId, comments, setComments}) => {
         body: '',  
     }
    
-    const [formData, updateFormData] = useState(initialFormComment)
+    const [formData, updateFormData] = useState<IComment>(initialFormComment)
 
-    const handleChange = (e) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         updateFormData({
             ...formData,
             [e.target.name]: e.target.value.trim()
@@ -23,7 +31,7 @@ const AddComments = ({postId, comments, setComments}) => {
     }
  
     // Send form
-    const handleSubmitForm = (e) => {
+    const handleSubmitForm = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
            const setCommnet = async () => {
                 const assignDataForm = await sendComment(postId, formData)
@@ -53,5 +61,3 @@ const AddComments = ({postId, comments, setComments}) => {
         </form>
     )
 }
-
-export default AddComments

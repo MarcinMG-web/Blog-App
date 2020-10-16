@@ -15,7 +15,7 @@ export const getAllUsers = async () => {
     }
 }
 
-export const getPostsById = async (userId: any) => {
+export const getPostsById = async (userId: number) => {
     try {
        return await api.get(`users/${userId}/posts`)
         .then(({data})=> data);

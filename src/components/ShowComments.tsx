@@ -1,11 +1,23 @@
-import React, {useState, useEffect}  from 'react'
-import AddComments from './AddComments'
+import React, { useState, useEffect }  from 'react'
+import { AddComments } from './AddComments'
 
-import {getCommentsById} from '../services/ApiService'
+import { getCommentsById } from '../services/ApiService'
 
-const ShowComments = ({postId}) => {
+export interface IComment {
+   postId: any, 
+   id: any, 
+   name: string, 
+   email: string, 
+   body: string
+}
 
-    const [comments, setComments] = useState([]);
+interface IProps {
+    postId: number
+}
+
+export const ShowComments = ({postId}: IProps): JSX.Element => {
+
+    const [comments, setComments] = useState<IComment[]>([]);
 
     useEffect(() => {
 
@@ -21,7 +33,7 @@ const ShowComments = ({postId}) => {
     return (
         <div>
 
-            {comments.map(comment => (<div className = "card-body" key = {comment.id} >
+            {comments.map((comment:IComment) => (<div className = "card-body" key = {comment.id} >
                         <div className="card-body-userID">Post id: {postId}</div>
                             {/* COMMENT  NAME*/}
                                 <b>Name: {comment.name}</b>
@@ -42,7 +54,7 @@ const ShowComments = ({postId}) => {
                 postId ? 
                 <AddComments 
                     postId={postId} 
-                    comments={comments} 
+                    comments={comments}
                     setComments = {setComments}/> 
                 : 
                 null
@@ -51,5 +63,3 @@ const ShowComments = ({postId}) => {
         </div>
     )
 }
-
-export default ShowComments

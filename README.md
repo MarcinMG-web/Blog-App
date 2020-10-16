@@ -15,4 +15,4 @@ If you want to check. Download project on yours PC. Open the terminal and instal
 3. npm start
 4. Open the browsers at http://localhost:3000.
 
-React app using: Javascript ES6 ES7 ES8 ES9, Bootstrap, Fetch API, Dependency injection, Bridge Pattern
+React app using: Javascript ES6 ES7 ES8 ES9,TypeScript,Bootstrap, Fetch API, Dependency injection, Bridge Pattern

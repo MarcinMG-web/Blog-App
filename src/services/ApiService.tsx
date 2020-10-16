@@ -15,8 +15,7 @@ export const getAllUsers = async () => {
     }
 }
 
-
-export const getPostsById = async (userId) => {
+export const getPostsById = async (userId: any) => {
     try {
        return await api.get(`users/${userId}/posts`)
         .then(({data})=> data);
@@ -26,7 +25,7 @@ export const getPostsById = async (userId) => {
     }
 }
 
-export const getCommentsById = async (postId) => {
+export const getCommentsById = async (postId: number) => {
     return await api.get(`/posts/${postId}/comments`)
         .then(({data})=> data)
                        
@@ -34,7 +33,7 @@ export const getCommentsById = async (postId) => {
     
 }
 
-export const sendComment = async (postId, formData) => {
+export const sendComment = async (postId: number, formData: any) => {
     return await api.post(`/posts/${postId}/comments`, formData)
     
         .then(({data})=> data)
@@ -42,7 +41,7 @@ export const sendComment = async (postId, formData) => {
         .catch(err => console.log(err));
 }
 
-export const deletePostById = async (postId) => {
+export const deletePostById = async (postId : number) => {
      return await api.delete(`/posts/${postId}`)
     .then(({data})=> data)
                         

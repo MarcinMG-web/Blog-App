@@ -1,14 +1,38 @@
-import React, { useState, useEffect} from 'react'
+import React, { useState, useEffect, ChangeEvent} from 'react'
 import { getAllUsers } from '../services/ApiService'
 
 import Posts from './Posts'
 
-const SerchUsers = () => {  
+export default interface IUser {
+    id: number,
+    name: string,
+    username: string,
+    email: string,
+    address: {
+        street: string,
+        suite: string,
+        city: string,
+        zipcode: number,
+        geo: {
+            lat: number,
+            lng: number,
+        }
+    },
+    phone: number,
+    website: string,
+    company: {
+        name: string,
+        catchPhrase: string,
+        bs: string,
+    }
+}
 
-    const [users, setUsers] = useState([])
-    const [isloading, setLoading] = useState(true);
+export const SerchUsers = (): JSX.Element => {  
+   
+    const [users, setUsers] = useState<IUser[]>([])
+    const [isloading, setLoading] = React.useState(true);
     
-    const [userId, setUserId] = useState(0) 
+    const [userId, setUserId] = React.useState(0) 
 
      useEffect(() => {
 
@@ -26,8 +50,8 @@ const SerchUsers = () => {
         return <h1>Loading ...</h1>
     }
 
-    const handleChangeSelect = (e) => {
-        const selectedUser = e.target.value
+    const handleChangeSelect = (e: ChangeEvent<HTMLSelectElement>) => {
+        const selectedUser = e.target.selectedIndex
         setUserId(selectedUser)
     }
 
@@ -40,7 +64,7 @@ const SerchUsers = () => {
                     <select id="users" onChange={handleChangeSelect}> 
                         
                         <option>Users ...</option>
-                            {users.map(user =>
+                            {users.map((user: IUser) =>
                                 <option key={user.id} value={user.id} >
                                 {user.id} {user.name} 
                         </option>
@@ -56,4 +80,3 @@ const SerchUsers = () => {
     )
 }
 
-export default SerchUsers

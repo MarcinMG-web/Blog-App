@@ -6,7 +6,7 @@
 }
 
 body {
-  background: url(img/tlo.png);
+  background: url(img/background.png);
   /* This patern from www.subtlepatterns.com  */
   display: flex;
   flex-direction: column;

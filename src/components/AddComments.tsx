@@ -22,7 +22,7 @@ export const AddComments = ({postId, comments, setComments}:IProps): JSX.Element
    
     const [formData, updateFormData] = useState<IComment>(initialFormComment)
 
-    const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>):void => {
         updateFormData({
             ...formData,
             [e.target.name]: e.target.value.trim()
@@ -31,7 +31,7 @@ export const AddComments = ({postId, comments, setComments}:IProps): JSX.Element
     }
  
     // Send form
-    const handleSubmitForm = (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmitForm = (e:React.FormEvent<HTMLFormElement>):void => {
         e.preventDefault();
            const setCommnet = async () => {
                 const assignDataForm = await sendComment(postId, formData)

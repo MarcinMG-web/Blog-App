@@ -50,7 +50,7 @@ export const SerchUsers = (): JSX.Element => {
         return <h1>Loading ...</h1>
     }
 
-    const handleChangeSelect = (e: ChangeEvent<HTMLSelectElement>) => {
+    const handleChangeSelect = (e: ChangeEvent<HTMLSelectElement>):void => {
         const selectedUser = e.target.selectedIndex
         setUserId(selectedUser)
     }

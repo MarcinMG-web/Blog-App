@@ -4,8 +4,8 @@ import { AddComments } from './AddComments'
 import { getCommentsById } from '../services/ApiService'
 
 export interface IComment {
-   postId: any, 
-   id: any, 
+   postId: string, 
+   id: string, 
    name: string, 
    email: string, 
    body: string

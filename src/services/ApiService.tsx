@@ -12,7 +12,7 @@ export const getAllUsers = async () => {
 
     } catch (err) {
         console.log(err)
-    }
+        }
 }
 
 export const getPostsById = async (userId: number) => {
@@ -22,7 +22,7 @@ export const getPostsById = async (userId: number) => {
     
     } catch(err) {
         console.log(err)   
-    }
+        }   
 }
 
 export const getCommentsById = async (postId: number) => {

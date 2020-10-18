@@ -47,4 +47,3 @@ export const deletePostById = async (postId : number) => {
                         
      .catch(err => console.log(err));
 }
-

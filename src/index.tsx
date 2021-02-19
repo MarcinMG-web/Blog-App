@@ -10,13 +10,12 @@ import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
-      <div className="App">
-        <Header />
-        <SerchUsers />
-    </div> 
+    <div className='App'>
+      <Header />
+      <SerchUsers />
+    </div>
   </React.StrictMode>,
   document.getElementById('root')
 );
-
 
 serviceWorker.unregister();

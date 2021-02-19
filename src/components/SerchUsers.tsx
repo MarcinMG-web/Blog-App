@@ -1,81 +1,76 @@
-import React, { useState, useEffect, ChangeEvent } from 'react'
-import { getAllUsers } from '../services/ApiService'
+import React, { useState, useEffect, ChangeEvent } from 'react';
+import { getAllUsers } from '../services/ApiService';
 
-import { Posts } from './Posts'
+import { Posts } from './Posts';
 
 export interface IUser {
-    id: number,
-    name: string,
-    username: string,
-    email: string,
-    address: {
-        street: string,
-        suite: string,
-        city: string,
-        zipcode: number,
-        geo: {
-            lat: number,
-            lng: number,
-        }
-    },
-    phone: number,
-    website: string,
-    company: {
-        name: string,
-        catchPhrase: string,
-        bs: string,
-    }
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+  address: {
+    street: string;
+    suite: string;
+    city: string;
+    zipcode: number;
+    geo: {
+      lat: number;
+      lng: number;
+    };
+  };
+  phone: number;
+  website: string;
+  company: {
+    name: string;
+    catchPhrase: string;
+    bs: string;
+  };
 }
 
-export const SerchUsers = (): JSX.Element => {  
-   
-    const [users, setUsers] = useState<IUser[]>([])
-    const [isloading, setLoading] = React.useState(true);
-    
-    const [userId, setUserId] = React.useState(0) 
+export const SerchUsers = (): JSX.Element => {
+  const [users, setUsers] = useState<IUser[]>([]);
+  const [isloading, setLoading] = React.useState(true);
 
-     useEffect(() => {
+  const [userId, setUserId] = React.useState(0);
 
-        const getUsers = async () => { 
-            setLoading(false)
+  useEffect(() => {
+    const getUsers = async () => {
+      setLoading(false);
 
-            const dataUsers = await getAllUsers();
-            setUsers(dataUsers)
-        }
+      const dataUsers = await getAllUsers();
+      setUsers(dataUsers);
+    };
 
-        getUsers();
-    }, []);
-    
-   if(isloading){
-        return <h1>Loading ...</h1>
-    }
+    getUsers();
+  }, []);
 
-    const handleChangeSelect = (e: ChangeEvent<HTMLSelectElement>):void => {
-        const selectedUser = e.target.selectedIndex
-        setUserId(selectedUser)
-    }
+  if (isloading) {
+    return <h1>Loading ...</h1>;
+  }
 
-    return (
-        <div>
-            <div>Find user to display posts:</div>
+  const handleChangeSelect = (e: ChangeEvent<HTMLSelectElement>): void => {
+    const selectedUser = e.target.selectedIndex;
+    setUserId(selectedUser);
+  };
 
-            <div className="input-group">
-                <div className="custom-file">
-                    <select id="users" onChange={handleChangeSelect}> 
-                        
-                        <option>Users ...</option>
-                            {users.map((user: IUser) =>
-                                <option key={user.id} value={user.id} >
-                                 {user.name} - {user.id}
-                        </option>
-                        )}
+  return (
+    <div>
+      <div>Find user to display posts:</div>
 
-                    </select>
-                </div>
-            </div>
-
-            {(userId>0) ? <Posts userId = {userId}/> : null}
-
+      <div className='input-group'>
+        <div className='custom-file'>
+          <select id='users' onChange={handleChangeSelect}>
+            <option>Users ...</option>
+            {users.map((user: IUser) => (
+              <option key={user.id} value={user.id}>
+                {user.name} - {user.id}
+              </option>
+            ))}
+          </select>
         </div>
-    )
-}
+      </div>
+
+      {userId > 0 ? <Posts userId={userId} /> : null}
+    </div>
+  );
+};

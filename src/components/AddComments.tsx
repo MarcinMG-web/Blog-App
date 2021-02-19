@@ -1,63 +1,88 @@
-import React,  { useState, ChangeEvent, FormEvent } from 'react'
+import React, { useState, ChangeEvent } from 'react';
 
-import { IComment } from './ShowComments'
+import { IComment } from './ShowComments';
 
-import { sendComment } from '../services/ApiService'
+import { sendComment } from '../services/ApiService';
 
 interface IProps {
-    postId: number,
-    comments: any,
-    setComments: any,
+  postId: number;
+  comments: any;
+  setComments: any;
 }
 
-export const AddComments = ({postId, comments, setComments}:IProps): JSX.Element => {
-    
-    const initialFormComment:IComment  = {
-        postId: '',
-        id: '',
-        name:'',
-        email:'',
-        body: '',  
-    }
-   
-    const [formData, updateFormData] = useState<IComment>(initialFormComment)
+export const AddComments = ({
+  postId,
+  comments,
+  setComments,
+}: IProps): JSX.Element => {
+  const initialFormComment: IComment = {
+    postId: '',
+    id: '',
+    name: '',
+    email: '',
+    body: '',
+  };
 
-    const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>):void => {
-        updateFormData({
-            ...formData,
-            [e.target.name]: e.target.value.trim()
-        })
- 
-    }
- 
-    // Send form
-    const handleSubmitForm = (e:React.FormEvent<HTMLFormElement>):void => {
-        e.preventDefault();
-           const setCommnet = async () => {
-                const assignDataForm = await sendComment(postId, formData)
-                               
-                const newComment = comments.slice()
-                newComment.push(assignDataForm);
-                setComments(newComment)
-            }
+  const [formData, updateFormData] = useState<IComment>(initialFormComment);
 
-       setCommnet();
-    }
-  
-    return ( 
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ): void => {
+    updateFormData({
+      ...formData,
+      [e.target.name]: e.target.value.trim(),
+    });
+  };
 
-        <form onSubmit = {handleSubmitForm}>
+  // Send form
+  const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+    const setCommnet = async () => {
+      const assignDataForm = await sendComment(postId, formData);
 
-            <label htmlFor="exampleFormControlTextarea1" className='form-lable'>Your Coment:</label>
+      const newComment = comments.slice();
+      newComment.push(assignDataForm);
+      setComments(newComment);
+    };
 
-            <input type={'text'} className={'form-control'}  name={'name'}  placeholder={'Name:'} onChange={handleChange} />
+    setCommnet();
+  };
 
-            <textarea className="form-control" name={'body'}  placeholder='Comment body:' rows={3} onChange={handleChange}/>
+  return (
+    <form onSubmit={handleSubmitForm}>
+      <label htmlFor='exampleFormControlTextarea1' className='form-lable'>
+        Your Coment:
+      </label>
 
-            <input type={'email'} className={'form-control'}  name={'email'}  placeholder={'Email:'} onChange={handleChange}/>
-                
-            <input type={"submit"} value={'Add Comment'} className="btn btn-success" />
-               
-        </form>
-    )
-}
+      <input
+        type={'text'}
+        className={'form-control'}
+        name={'name'}
+        placeholder={'Name:'}
+        onChange={handleChange}
+      />
+
+      <textarea
+        className='form-control'
+        name={'body'}
+        placeholder='Comment body:'
+        rows={3}
+        onChange={handleChange}
+      />
+
+      <input
+        type={'email'}
+        className={'form-control'}
+        name={'email'}
+        placeholder={'Email:'}
+        onChange={handleChange}
+      />
+
+      <input
+        type={'submit'}
+        value={'Add Comment'}
+        className='btn btn-success'
+      />
+    </form>
+  );
+};

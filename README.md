@@ -4,7 +4,7 @@ Post app. After the page loads. App should was displayed with any user selected 
 
 After selecting a specific user we display:
 
-All of posts and comments pecific user.
+All of posts and comments pacific user.
 
 We may to add a new comment to de user posts.
 

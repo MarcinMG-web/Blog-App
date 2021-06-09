@@ -27,7 +27,7 @@ export interface IUser {
   };
 }
 
-export const SerchUsers = (): JSX.Element => {
+export const SearchUsers = (): JSX.Element => {
   const [users, setUsers] = useState<IUser[]>([]);
   const [isloading, setLoading] = React.useState(true);
 

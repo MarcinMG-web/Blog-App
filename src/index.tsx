@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { Header } from './components/Header';
-import { SerchUsers } from './components/SerchUsers';
+import { SearchUsers } from './components/SearchUsers';
 
 import './css/App.css';
 
@@ -12,7 +12,7 @@ ReactDOM.render(
   <React.StrictMode>
     <div className='App'>
       <Header />
-      <SerchUsers />
+      <SearchUsers />
     </div>
   </React.StrictMode>,
   document.getElementById('root')

@@ -19,12 +19,12 @@ export const ShowComments = ({ postId }: IProps): JSX.Element => {
   const [comments, setComments] = useState<IComment[]>([]);
 
   useEffect(() => {
-    const getCommnets = async () => {
+    const getComments = async () => {
       const dataComments = await getCommentsById(postId);
       setComments(dataComments);
     };
 
-    getCommnets();
+    getComments();
   }, [postId]);
 
   return (

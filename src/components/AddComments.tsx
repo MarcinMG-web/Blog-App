@@ -37,7 +37,7 @@ export const AddComments = ({
   // Send form
   const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    const setCommnet = async () => {
+    const setComment = async () => {
       const assignDataForm = await sendComment(postId, formData);
 
       const newComment = comments.slice();
@@ -45,13 +45,13 @@ export const AddComments = ({
       setComments(newComment);
     };
 
-    setCommnet();
+    setComment();
   };
 
   return (
     <form onSubmit={handleSubmitForm}>
       <label htmlFor='exampleFormControlTextarea1' className='form-lable'>
-        Your Coment:
+        Your Comet:
       </label>
 
       <input

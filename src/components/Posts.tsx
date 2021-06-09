@@ -17,7 +17,7 @@ interface IProps {
 export const Posts = ({ userId }: IProps): JSX.Element => {
   const [posts, setPosts] = useState<IPost[]>([]);
 
-  const [curreatPage, setCurreatPage] = React.useState(1);
+  const [currentPage, setCurrentPage] = React.useState(1);
   const [postsPerPage] = React.useState(1);
 
   // Display Comments
@@ -33,20 +33,20 @@ export const Posts = ({ userId }: IProps): JSX.Element => {
   }, [userId]);
 
   // Get current post
-  const indexOfLastPost = curreatPage * postsPerPage;
+  const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
   // Changed Page
   const nextPage = (): void => {
-    if (curreatPage < posts.length) {
-      setCurreatPage(curreatPage + 1);
+    if (currentPage < posts.length) {
+      setCurrentPage(currentPage + 1);
     }
   };
 
   const prevPage = (): void => {
-    if (curreatPage > 1) {
-      setCurreatPage(curreatPage - 1);
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
     }
   };
 
@@ -55,7 +55,7 @@ export const Posts = ({ userId }: IProps): JSX.Element => {
       <button
         type='button'
         className='btn btn-outline-secondary'
-        value={curreatPage}
+        value={currentPage}
         onClick={prevPage}
       >
         Prev Page
@@ -63,7 +63,7 @@ export const Posts = ({ userId }: IProps): JSX.Element => {
       <button
         type='button'
         className='btn btn-outline-secondary'
-        value={curreatPage}
+        value={currentPage}
         onClick={nextPage}
       >
         Next page

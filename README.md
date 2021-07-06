@@ -8,7 +8,7 @@ All of posts and comments pacific user.
 
 We may to add a new comment to de user posts.
 
-If you want to check. Download project on yours PC. Open the terminal and install packages
+If you want to check. Click the link: https://blog-aplications.herokuapp.com/ wait a few minutes for the server to stand up or you might to download project on yours PC. Open the terminal and install packages:
 
 1. Open project file
 2. npm install

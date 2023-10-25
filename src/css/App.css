@@ -69,8 +69,7 @@ option {
 }
 
 .card-body-userID {
- position: absolute;
- right: 12em;
+ display: flex;
 }
 
 .card-body-postID{
